@@ -35,12 +35,12 @@ div {
 }
 
 .counters {
-  top: 345px;
-  left: 330px;
+  top: 303.9px;
+  left: 327px;
 }
 
 .answers {
-  top: 313px;
+  top: 305px;
   left: 387px;
 }
 
@@ -63,5 +63,42 @@ div {
 }
 
 app-answer {
-    margin-bottom: 16.6px;
+  margin-bottom: 0px;
+  height: 52px;
+}
+
+.errors {
+    position: absolute;
+    top: 270px;
+}
+
+.errors-left {
+    left: 214px;
+}
+
+.errors-right {
+    left: 1002px;
+}
+
+.error-left-middle, .error-right-middle {
+  position: absolute;
+  top: 152.7px;
+}
+.error-left-bottom, .error-right-bottom {
+  position: absolute;
+  top: 308.9px;
+}
+
+app-score-small {
+  position: absolute;
+  top: 666px;
+  left: 885px;
+}
+
+.tablica-placeholder {
+  position: absolute;
+  top: 247px;
+  width: 869px;
+  left: 210px;
+  height: 503px;
 }

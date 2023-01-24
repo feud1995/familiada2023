@@ -1,6 +1,7 @@
 .unanswer-wrapper {
   display: flex;
-  flex-direction: row;;
+  flex-direction: row;
+  margin-top: 4px;
 }
 
 .unanswer {
@@ -16,4 +17,11 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+  }
+
+  .answer { 
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 5.7px;
   }

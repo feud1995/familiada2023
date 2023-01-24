@@ -1,17 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="wrapper">
-    <score class="score-team-left" [score]="150"></score>
-    <score class="score-main" [score]="300"></score>
-    <score class="score-team-right" [score]="150"></score>
-  
-    <section class="counters letter-wrapper">
-        <!-- <app-answer></app-answer> -->
-    </section>
+<div class="wrapper" *ngIf="localStoragePooling | async as store">
+    <score class="score-team-left" [score]="store.scores.teamLeft"></score>
+    <score class="score-main" [score]="store.scores.roundScore"></score>
+    <score class="score-team-right" [score]="store.scores.teamRight"></score>
 
-    <section class="answers letter-wrapper">
-        <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>
+    <section class="errors errors-left">
+        <app-error class="error-left-top" *ngIf="store.errors?.teamLeft1"></app-error>
+        <app-error class="error-left-middle" 
+        *ngIf="store.errors?.teamLeft2 || store.errors?.teamLeftBig"></app-error>
+        <app-error class="error-left-bottom" *ngIf="store.errors?.teamLeft3"></app-error>
     </section>
   
+    <section class="errors errors-right">
+        <app-error class="error-right-top" *ngIf="store.errors?.teamRight1"></app-error>
+        <app-error class="error-right-middle" 
+        *ngIf="store.errors?.teamRight2 || store.errors?.teamRightBig"></app-error>
+        <app-error class="error-right-bottom" *ngIf="store.errors?.teamRight3"></app-error>
+    </section>
+  
+    <ng-container *ngIf="selectedQuestionSet$ | async as questions">
+        <section class="counters letter-wrapper">
+            <app-answer *ngFor="let question of questions; let i = index"  [isShown]="true" [answer]="(i+1).toString()"></app-answer>
+        </section>
+ 
+        <section class="answers letter-wrapper" >
+            <app-answer *ngFor="let question of questions" 
+            [answer]="question.answer"
+            [isShown]="question.isAnswered"
+            ></app-answer>
+        </section>
+    </ng-container>
+  
+    <app-score-small class="score-small" [score]="store.scores.roundScore"></app-score-small>
+    <img src="assets/logo_cut.png" *ngIf="store.selectedSetIndex === -1" class="tablica-placeholder" />
     <img src="assets/Familiada_Back.jpg" class="tablica" />
   </div>
   

@@ -10,9 +10,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BoardComponent } from './components/board/board.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { ScoreSmallComponent } from './components/score-small/score-small.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
-  declarations: [AppComponent, ScoreComponent, PanelComponent, BoardComponent, AnswerComponent, ScoreSmallComponent],
+  declarations: [AppComponent, ScoreComponent, PanelComponent, BoardComponent, AnswerComponent, ScoreSmallComponent, ErrorComponent],
   imports: [BrowserModule,
      BrowserAnimationsModule, CommonModule, MatButtonModule,
      AppRoutingModule

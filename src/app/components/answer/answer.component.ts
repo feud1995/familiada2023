@@ -16,4 +16,9 @@ export class AnswerComponent implements OnInit {
   get emptyAnswer() {
     return ['','','','','','','','','','','','','','','','','',''];
   }
+
+
+  nbspize(value: string) {
+    return value.replace(/ /g, "\u00a0\u00a0");
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-score-small',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./score-small.component.scss']
 })
 export class ScoreSmallComponent implements OnInit {
+  @Input() score = 0;
 
   constructor() { }
 

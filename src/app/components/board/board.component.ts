@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, interval, map, timer } from 'rxjs';
+import { isEqual } from 'lodash-es';
+import { BehaviorSubject, distinctUntilChanged, interval, map, Observable, timer } from 'rxjs';
+import { GameAnswer, GameQuestion, GameQuestionSet, GameStore } from 'src/app/store';
 
 @Component({
   selector: 'app-board',
@@ -8,21 +10,26 @@ import { BehaviorSubject, interval, map, timer } from 'rxjs';
 })
 export class BoardComponent {
   title: string = "Familiada";
-  answers = ["MALUTKIE", "Mu", "JEST", "SMOLUTKE", "MLEMI", "... ..."];
+  answers = [];
+
   localStoragePooling = interval(250).pipe(
-    map(() => localStorage.getItem('hello'))
+    map(() => JSON.parse(localStorage.getItem('store') as string) as GameStore),
+    distinctUntilChanged((prev, next) => isEqual(prev, next))
   );
+
+  selectedQuestionSet$: Observable<Array<GameAnswer> | []> = this.localStoragePooling.pipe(
+    map((store) => {
+      const questionIndex = store.currentQuestionIndex;
+
+      if(store.selectedSetIndex !== -1 && questionIndex !== -1) {
+        return store.questionsSets[store.selectedSetIndex].questions[questionIndex].answers;
+      }
+      return [];
+    }),
+  )
+
+
+  constructor() { }
+
   
-  constructor() {
-    this.test();
-  }
-
-  test() {
-    this.title = localStorage.getItem("hello") || 'test';
-  }
-
-  yo() {
-    localStorage.setItem("hello", Math.random().toString());
-    this.test();
-  }
 }
