@@ -9,9 +9,9 @@ div {
   margin-bottom: 0;
   position: relative;
   margin-top: 2rem;
-  box-shadow: 0px 0px 20px 20px #8477d4;
+  box-shadow: 0px 0px 31px 21px #ea134ec2;
   height: 800px;
-  border: 5px solid #585ea6;
+  border: 3px solid #343434;
 }
 
 .tablica {
@@ -89,7 +89,7 @@ app-answer {
   top: 308.9px;
 }
 
-app-score-small {
+.score-small {
   position: absolute;
   top: 666px;
   left: 885px;
@@ -101,4 +101,13 @@ app-score-small {
   width: 869px;
   left: 210px;
   height: 503px;
+}
+
+.values {
+  top: 306px;
+  left: 884px;
+}
+
+.score-value {
+  margin-bottom: 27.5px;
 }

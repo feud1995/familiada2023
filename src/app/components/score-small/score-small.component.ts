@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ScoreSmallComponent implements OnInit {
   @Input() score = 0;
-
+  @Input() isSuma = false;
+  
   constructor() { }
 
   ngOnInit(): void {

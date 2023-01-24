@@ -29,9 +29,19 @@
             [isShown]="question.isAnswered"
             ></app-answer>
         </section>
+
+        <section class="values letter-wrapper">
+            <ng-container *ngFor="let question of questions;">
+                <app-score-small
+                [ngStyle]="{ 'opacity': question.isAnswered ? 100 : 0 }"  
+                class="score-value" 
+                [score]="question.value">
+            </app-score-small>
+            </ng-container>
+        </section>
     </ng-container>
   
-    <app-score-small class="score-small" [score]="store.scores.roundScore"></app-score-small>
+    <app-score-small class="score-small" [score]="store.scores.roundScore" [isSuma]="true"></app-score-small>
     <img src="assets/logo_cut.png" *ngIf="store.selectedSetIndex === -1" class="tablica-placeholder" />
     <img src="assets/Familiada_Back.jpg" class="tablica" />
   </div>

@@ -1,3 +1,6 @@
+import { map } from "lodash-es"
+import { allSets } from "./sets"
+
 export interface GameAnswer {
     isAnswered: boolean,
     answer: string,
@@ -53,70 +56,17 @@ export const store: GameStore = {
         teamRight: 0,
         roundScore: 0
     },
-    questionsSets: [{
-        setName: 'Gra 1',
-        questions: [
-            {
-                question: 'Więcej niż kanapka to?',
-                answers: [
-                    {
-                        isAnswered: false,
-                        answer: 'Lama',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'Koza',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'Owca',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'CHECHUSZKI',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'MAŁE SŁODKIE KIT',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'TESTOWA ODP.',
-                        value: 34
-                    },
-                    
-                ],
-            },
-            {
-                question: 'Najlepszy sklep na jedzonko?',
-                answers: [
-                    {
-                        isAnswered: false,
-                        answer: 'Biedronka',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'Lidl',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'Allegro',
-                        value: 34
-                    },
-                    {
-                        isAnswered: false,
-                        answer: 'Carfą',
-                        value: 34
-                    },
-                ],
-            },
-        ]
-    }]
+    questionsSets: allSets.map((questions, index) => {
+        return {
+            setName: `Gra ${index + 1}`,
+            questions: questions.map(({question, answers}) => ({
+                question,
+                answers: map(answers, (value, key) => ({
+                    isAnswered: false,
+                    answer: key as string,
+                    value: value as number
+                }))
+            }))
+        }
+    }),
 };

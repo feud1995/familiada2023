@@ -14,7 +14,7 @@ export class AnswerComponent implements OnInit {
   ngOnInit(): void { }
 
   get emptyAnswer() {
-    return ['','','','','','','','','','','','','','','','','',''];
+    return ['','','','','','','','','','','','','','',''];
   }
 
 

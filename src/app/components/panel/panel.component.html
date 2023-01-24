@@ -1,61 +1,155 @@
-<h1>Sterownik Tablicy</h1>
+<h1 class="font" style="text-align: center; font-size: 40px">FAMILIADA 1.0</h1>
 
 <h2>Główne sterowanie</h2>
 
 <section class="controls-main" *ngIf="localStoragePooling | async as store$">
-    <button (click)="resetGame()" mat-raised-button color="primary">Zresetuj grę</button>
-    <button *ngFor="let set of store$.questionsSets; let i = index" 
-        (click)="chooseSet(i)" mat-raised-button color="primary">Zacznij zestaw {{ i + 1 }}
-    </button>
+  <button (click)="resetGame()" mat-raised-button color="primary">
+    Zresetuj grę
+  </button>
+  <button
+    *ngFor="let set of store$.questionsSets; let i = index"
+    (click)="chooseSet(i)"
+    mat-raised-button
+    color="primary"
+  >
+    Zestaw {{ i + 1 }}
+  </button>
 </section>
 
 <h2>Dźwięki</h2>
 <section class="controls-main">
-    <button (click)="play('good_answer.mp3')" mat-raised-button color="primary">Dobre</button>
-    <button (click)="play('bad_answer.mp3')" mat-raised-button color="primary">Złe</button>
-    <button (click)="play('jingiel_duzy.mp3')" mat-raised-button color="primary">Intro</button>
-    <button (click)="play('jingiel_start.mp3')" mat-raised-button color="primary">Przed pytaniem</button>
-    <button (click)="stop()" mat-raised-button color="primary">Cisza!</button>
+  <button (click)="play('good_answer.mp3')" mat-raised-button color="primary">
+    Dobre
+  </button>
+  <button (click)="play('bad_answer.mp3')" mat-raised-button color="primary">
+    Złe
+  </button>
+  <button (click)="play('jingiel_duzy.mp3')" mat-raised-button color="primary">
+    Intro
+  </button>
+  <button (click)="play('jingiel_start.mp3')" mat-raised-button color="primary">
+    Przed pytaniem
+  </button>
+  <button (click)="stop()" mat-raised-button color="primary">Cisza!</button>
 </section>
 
 <h2>Sterowanie grą</h2>
 
-<section class="controls-main controls-questions" *ngIf="selectedQuestion$ | async as questionSet">
+<ng-container *ngIf="isGameStarted$ | async; else cantSteer">
+  <section
+    class="controls-main controls-questions"
+    *ngIf="selectedQuestion$ | async as questionSet"
+  >
     <h3 class="question">{{ questionSet.question }}</h3>
-    
-    <button 
-        *ngFor="let answer of selectedQuestionSetAnswers$ | async; let i = index"
-        [disabled]="answer.isAnswered"
-        (click)="uncoverAnswer(i)" mat-raised-button color="primary">
-        Odkryj "{{ answer.answer }}" za {{ answer.value }}
-    </button>
+
+    <ng-container
+      *ngFor="let answer of selectedQuestionSetAnswers$ | async; let i = index"
+    >
+      <section class="answers-close">
+        <button
+          [disabled]="answer.isAnswered"
+          (click)="uncoverAnswer(i)"
+          mat-raised-button
+          color="primary"
+        >
+          Odkryj "{{ answer.answer }}" za {{ answer.value }}
+        </button>
+        <button
+          [disabled]="answer.isAnswered"
+          (click)="uncoverAnswer(i, true)"
+          mat-raised-button
+          color="primary"
+        >
+          Odkryj "{{ answer.answer }}" bez pkt.
+        </button>
+      </section>
+    </ng-container>
 
     <section class="controls-points">
-        <button mat-raised-button (click)="givePointsToLeft()" color="secondary">Daj punkty Lewym</button>
-        <button mat-raised-button (click)="givePointsToRight()" color="secondary">Daj punkty Prawym</button>    
+      <button mat-raised-button (click)="givePointsToLeft()" color="secondary">
+        Daj punkty Lewym
+      </button>
+      <button mat-raised-button (click)="givePointsToRight()" color="secondary">
+        Daj punkty Prawym
+      </button>
     </section>
-    
-    <button mat-raised-button 
-        [disabled]="!hasNextQuestion()"
-        (click)="nextQuestion()" color="secondary">Kolejne pytanie</button>
-</section>
+
+    <button
+      mat-raised-button
+      [disabled]="!hasNextQuestion()"
+      (click)="nextQuestion()"
+      color="secondary"
+    >
+      Kolejne pytanie
+    </button>
+  </section>
+</ng-container>
+<ng-template #cantSteer>
+  <h3>Wybierz najpierw zestaw!</h3>
+</ng-template>
 
 <h2>Błędy</h2>
-<section class="controls-main controls-errors">
+
+<ng-container *ngIf="isGameStarted$ | async; else cantError">
+  <section class="controls-main controls-errors">
     <section class="control-errors-column">
-        <button (click)="showMidError('Left',1)" mat-raised-button color="primary">Błąd Zespół Lewy 1</button>
-        <button (click)="showMidError('Left',2)" mat-raised-button color="primary">Błąd Zespół Lewy 2</button>
-        <button (click)="showMidError('Left',3)" mat-raised-button color="primary">Błąd Zespół Lewy 3</button>    
-        <button (click)="showBigError('Left')" mat-raised-button color="primary">Błąd Lewy BIG</button>
+      <button
+        (click)="showMidError('Left', 1)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Lewy 1
+      </button>
+      <button
+        (click)="showMidError('Left', 2)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Lewy 2
+      </button>
+      <button
+        (click)="showMidError('Left', 3)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Lewy 3
+      </button>
+      <button (click)="showBigError('Left')" mat-raised-button color="primary">
+        Błąd Lewy BIG
+      </button>
     </section>
 
     <section class="control-errors-column">
-        <button (click)="showMidError('Right',1)" mat-raised-button color="primary">Błąd Zespół Prawy 1</button>
-        <button (click)="showMidError('Right',2)" mat-raised-button color="primary">Błąd Zespół Prawy 2</button>
-        <button (click)="showMidError('Right',3)" mat-raised-button color="primary">Błąd Zespół Prawy 3</button>
-        <button (click)="showBigError('Right')" mat-raised-button color="primary">Błąd Prawy BIG</button>
+      <button
+        (click)="showMidError('Right', 1)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Prawy 1
+      </button>
+      <button
+        (click)="showMidError('Right', 2)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Prawy 2
+      </button>
+      <button
+        (click)="showMidError('Right', 3)"
+        mat-raised-button
+        color="primary"
+      >
+        Błąd Zespół Prawy 3
+      </button>
+      <button (click)="showBigError('Right')" mat-raised-button color="primary">
+        Błąd Prawy BIG
+      </button>
     </section>
 
-    <section>
-    </section>
-</section>
+    <section></section>
+  </section>
+</ng-container>
+
+<ng-template #cantError>
+  <h3>Wybierz najpierw zestaw!</h3>
+</ng-template>

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { isEqual } from "lodash-es";
+import { forEach, isEqual } from "lodash-es";
 import { distinctUntilChanged, interval, map, Observable } from "rxjs";
 import { GameAnswer, GameQuestion, GameQuestionSet, GameStore, store } from "src/app/store";
 import produce from "immer"
@@ -14,6 +14,10 @@ export class PanelComponent {
     map(() => JSON.parse(localStorage.getItem('store') as string) as GameStore),
     distinctUntilChanged((prev, next) => isEqual(prev, next))
   );
+  isGameStarted$: Observable<boolean> = this.localStoragePooling.pipe(
+    map((store) => store.selectedSetIndex !== -1)
+  );  
+  
   private audio = new Audio();
 
 
@@ -30,6 +34,7 @@ export class PanelComponent {
   resetGame() {
     localStorage.setItem('store', JSON.stringify(store));
   }
+
 
   hasNextQuestion() {
     if(this.store.currentQuestionIndex !== -1) {
@@ -58,14 +63,14 @@ export class PanelComponent {
       return [];
     }));
 
-  uncoverAnswer(index: number) {
+  uncoverAnswer(index: number, noPoints = false) {
     setTimeout(() => {
       this.store = produce(this.store, draft => {
         const question = draft.questionsSets[draft.selectedSetIndex]
              .questions[draft.currentQuestionIndex]
              .answers[index];
         question.isAnswered = true;
-        draft.scores.roundScore += question.value;
+        draft.scores.roundScore += !noPoints ? question.value : 0;
       })
     }, 250)
     this.play('good_answer.mp3');
@@ -76,6 +81,8 @@ export class PanelComponent {
       draft.selectedSetIndex = index;
       draft.currentQuestionIndex = 0;
     });
+
+    this.play('jingiel_start.mp3');
   }
 
   givePointsToLeft() {
@@ -90,12 +97,21 @@ export class PanelComponent {
     })
   }
 
+  clearErrors() {
+    this.store = produce(this.store, draft => {
+      draft.errors = store.errors;
+    });
+  }
+
   nextQuestion() {
     if(this.hasNextQuestion()) {
+      this.clearErrors();
       this.store = produce(this.store, draft => {
         draft.scores.roundScore = 0;
         draft.currentQuestionIndex += 1;
       })
+
+      this.play('jingiel_start.mp3');
     }
   }
 
