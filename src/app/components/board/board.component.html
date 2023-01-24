@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="wrapper">
+    <score class="score-team-left" [score]="150"></score>
+    <score class="score-main" [score]="300"></score>
+    <score class="score-team-right" [score]="150"></score>
+  
+    <section class="counters letter-wrapper">
+        <!-- <app-answer></app-answer> -->
+    </section>
+
+    <section class="answers letter-wrapper">
+        <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>
+    </section>
+  
+    <img src="assets/Familiada_Back.jpg" class="tablica" />
+  </div>
+  

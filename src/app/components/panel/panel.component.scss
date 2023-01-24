@@ -1,0 +1,13 @@
+:host {
+    width: 600px;
+    display: block;
+}
+
+.controls-main {
+    display: flex;
+    flex-direction: row;
+
+    & > * {
+        margin-right: 0.5rem;
+    }
+}

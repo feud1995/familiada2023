@@ -1,0 +1,9 @@
+.font {
+  text-align: right;
+  font-size: 100px;
+  margin: 0;
+  padding: 0;
+  transform: scaleY(1.2);
+  letter-spacing: 12px;
+  filter: brightness(0.95) blur(1px);
+}

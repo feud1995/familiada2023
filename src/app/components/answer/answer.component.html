@@ -1,0 +1,5 @@
+<h1 *ngIf="isShown" class="answer font">{{ answer }}</h1>
+
+<section *ngIf="!isShown"  class="unanswer-wrapper">
+    <h1  *ngFor="let v of emptyAnswer" class="unanswer font">...</h1>
+</section>

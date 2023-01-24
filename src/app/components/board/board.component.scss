@@ -1,0 +1,67 @@
+$score-top: 62px;
+
+div {
+  text-align: left;
+}
+
+.wrapper {
+  padding: 0;
+  margin-bottom: 0;
+  position: relative;
+  margin-top: 2rem;
+  box-shadow: 0px 0px 20px 20px #8477d4;
+  height: 800px;
+  border: 5px solid #585ea6;
+}
+
+.tablica {
+  width: 1280px;
+  height: 800px;
+}
+
+.letter-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.font {
+  position: relative;
+  letter-spacing: 5px;
+  line-height: 3px;
+  transform: scaleY(1.2);
+  font-size: 29.5px;
+  display: block;
+}
+
+.counters {
+  top: 345px;
+  left: 330px;
+}
+
+.answers {
+  top: 313px;
+  left: 387px;
+}
+
+.score-main {
+  position: absolute;
+  top: 32.5px;
+  left: calc(1280px / 2 - 116px);
+}
+
+.score-team-left {
+  position: absolute;
+  top: $score-top;
+  left: calc(39px);
+}
+
+.score-team-right {
+  position: absolute;
+  top: $score-top;
+  left: calc(1280px - 262px);
+}
+
+app-answer {
+    margin-bottom: 16.6px;
+}
