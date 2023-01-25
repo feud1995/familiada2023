@@ -2,18 +2,20 @@
 
 <h2>Główne sterowanie</h2>
 
-<section class="controls-main" *ngIf="localStoragePooling | async as store$">
+<section class="controls-main">
   <button (click)="resetGame()" mat-raised-button color="primary">
     Zresetuj grę
   </button>
-  <button
-    *ngFor="let set of store$.questionsSets; let i = index"
-    (click)="chooseSet(i)"
-    mat-raised-button
-    color="primary"
-  >
-    Zestaw {{ i + 1 }}
-  </button>
+  <ng-container  *ngIf="localStoragePooling | async as store$">
+      <button
+      *ngFor="let set of store$.questionsSets; let i = index"
+      (click)="chooseSet(i)"
+      mat-raised-button
+      color="primary"
+    >
+      Zestaw {{ i + 1 }}
+    </button>
+  </ng-container>
 </section>
 
 <h2>Dźwięki</h2>
