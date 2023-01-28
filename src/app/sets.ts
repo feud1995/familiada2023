@@ -33,6 +33,17 @@ export const Set1 = [
     },
   },
   {
+    question: 'Jeśli szef przyłapie cię na spaniu w pracy, jaką możesz mieć wymówkę na zamknięte oczy?',
+    answers: {
+      "Skupienie": 23,
+      "Ból głowy": 21,
+      "Modlitwa": 17,
+      "Coś w oku": 15,
+      "Suche oczy": 13,
+      "Płacz": 11
+    },
+  },
+  {
     question: 'Drużynowa dyscyplina sportowa, w której nie używa się piłki?',
     answers: {
       Hokej: 25,
