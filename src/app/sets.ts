@@ -80,7 +80,7 @@ export const Set2 = [
     question: 'Żeby było ci cieplej nocy, weźmiesz do łózka...',
     answers: {
       "Kołdra": 30,
-      "Koc lub koc elek.": 18,
+      "Koc/koc elek.": 18,
       "Inna osoba": 16,
       "Piżama": 15,
       "Termofor": 11,
@@ -123,9 +123,9 @@ export const Set2 = [
   {
     question: 'Kiedy kogoś zamordujesz, musisz pozbyć się...',
     answers: {
-      "Narzędzie zbrodni": 25,
+      "Narz. zbrodni": 25,
       "Ciało": 20,
-      "Odcisków palc.": 19,
+      "Odcisków palców": 19,
       Krwi: 14,
       "Świadków": 13,
       "Ubrań": 9

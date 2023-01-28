@@ -35,7 +35,10 @@ export class PanelComponent {
   }
 
   resetGame() {
-    localStorage.setItem('store', JSON.stringify(store));
+    const isSure = confirm("Chcesz zresetować?");
+    if(isSure) {
+      localStorage.setItem('store', JSON.stringify(store));
+    }
   }
 
   hasNextQuestion() {
@@ -108,7 +111,8 @@ export class PanelComponent {
   }
 
   nextQuestion() {
-    if(this.hasNextQuestion()) {
+    const isSure = confirm("Chcesz kolejne pytanie?");
+    if(this.hasNextQuestion() && isSure) {
       this.clearErrors();
       this.store = produce(this.store, draft => {
         draft.scores.roundScore = 0;
