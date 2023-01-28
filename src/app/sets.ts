@@ -1,85 +1,144 @@
 export const Set1 = [
   {
-    question: 'Więcej niż kanapka to?',
+    question: 'Rodzaj kobiecego obuwia?',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Testset: 55,
+      Szpilki: 32,
+      Kozaki: 21,
+      'SANDAŁY': 16,
+      Japonki: 15,
+      'Na koturnach': 9,
+      'Na platformie': 7
     },
   },
   {
-    question: 'Fajna babka?',
+    question: 'Danie, którego głównym składnikiem jest jajko?',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Testset: 55,
+      Jajecznica: 35,
+      Omlet: 18,
+      "J. Na Miękko": 15,
+      "J. w koszulce": 12,
+      "Kogel mogel": 11,
+      "Pasta jajeczna": 9
     },
   },
   {
-    question: 'Lepsza zabawka?',
+    question: 'Wymień państwo na literę A',
     answers: {
-      Ttestset: 25,
-      Hahah: 55,
+      Austria: 29,
+      Australia: 28,
+      Albania: 19,
+      Afganistan: 10,
+      Andora: 8,
+      Armenia: 6
     },
   },
   {
-    question: 'Wesoła turkawaka?',
+    question: 'Drużynowa dyscyplina sportowa, w której nie używa się piłki?',
     answers: {
-      Ttestset: 25,
-      Testset: 55,
+      Hokej: 25,
+      "Skoki druż.": 24,
+      "Sztafeta bieg.": 20,
+      "Kajakarstwo": 14,
+      "Curling": 10,
+      "Kolarstwo tor.": 7
     },
   },
   {
-    question: 'Ciekawe pytanie?',
+    question: 'Ozdoba noszona na ręku',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Tesfsegffessef: 34,
-      Testset: 55,
+      "Pierścionek": 25,
+      "Obrączka": 21,
+      "Bransoletka": 20,
+      "Zegarek": 15,
+      "Sygnet": 12,
+      "Tatuaż": 7
+    },
+  },
+  {
+    question: 'Wymień znanego Johnnego',
+    answers: {
+      Depp: 150,
+      Bravo: 105,
+      Cash: 45
     },
   },
 ];
 
 export const Set2 = [
   {
-    question: 'Więcej niż kanapka to?',
+    question: 'Wymień kraj, który sąsiaduje z Austrią?',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Testset: 55,
+      "Niemcy": 24,
+      "Węgry": 22,
+      "Szwajcaria": 19,
+      "Czechy": 17,
+      "Słowacja": 10,
+      "Włochy": 8
     },
   },
   {
-    question: 'Fajna babka?',
+    question: 'Żeby było ci cieplej nocy, weźmiesz do łózka...',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Testset: 55,
+      "Kołdra": 30,
+      "Koc lub koc elek.": 18,
+      "Inna osoba": 16,
+      "Piżama": 15,
+      "Termofor": 11,
+      Skarpetki: 10
     },
   },
   {
-    question: 'Lepsza zabawka?',
+    question: 'Wymień dobrze płatny zawód',
     answers: {
-      Ttestset: 25,
-      Hahah: 55,
+      Prawnik: 27,
+      Lekarz: 23,
+      Programista: 22,
+      "Płatny zabójca": 13,
+      Architekt: 9,
+      "Spawacz podwodny": 6
     },
   },
   {
-    question: 'Wesoła turkawaka?',
+    question: 'Wymień rodzaj płatków?',
     answers: {
-      Ttestset: 25,
-      Testset: 55,
+      Kukurydziane: 24,
+      "Śniegu": 22,
+      Owsiane: 17,
+      Kosmetyczne: 16,
+      Kwiatów: 14,
+      Uszu: 7
     },
   },
   {
-    question: 'Ciekawe pytanie?',
+    question: 'Co jeździ po torach??',
     answers: {
-      Ttestset: 25,
-      Tesfsegsef: 34,
-      Tesfsegffessef: 34,
-      Testset: 55,
+      "Pociąg": 23,
+      Tramwaj: 20,
+      Metro: 19,
+      Drezyna: 15,
+      "Kolejka górska": 14,
+      "Wagonik w kopalni": 9
     },
   },
+  {
+    question: 'Kiedy kogoś zamordujesz, musisz pozbyć się...',
+    answers: {
+      "Narzędzie zbrodni": 25,
+      "Ciało": 20,
+      "Odcisków palc.": 19,
+      Krwi: 14,
+      "Świadków": 13,
+      "Ubrań": 9
+    },
+  },
+  {
+    question: 'Jaki zawód wiąże się z przekazywaniem złych wiadomości?',
+    answers: {
+      "Lekarz": 130,
+      "Dziennikarz": 100,
+      "Policjant": 70
+    },
+  }
 ];
 
 export const allSets = [Set1, Set2];

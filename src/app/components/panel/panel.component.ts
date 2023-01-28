@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { forEach, isEqual } from "lodash-es";
-import { distinctUntilChanged, interval, map, Observable } from "rxjs";
+import { BehaviorSubject, distinctUntilChanged, interval, map, Observable, ReplaySubject, tap } from "rxjs";
 import { GameAnswer, GameQuestion, GameQuestionSet, GameStore, store } from "src/app/store";
 import produce from "immer"
 
@@ -10,31 +10,33 @@ import produce from "immer"
   styleUrls: ["./panel.component.scss"]
 })
 export class PanelComponent {
-  localStoragePooling = interval(250).pipe(
+  previousState = {};
+  localStoragePooling = interval(100).pipe(
     map(() => JSON.parse(localStorage.getItem('store') as string) as GameStore),
-    distinctUntilChanged((prev, next) => isEqual(prev, next))
-  );
+    distinctUntilChanged((prev, next) => isEqual(prev, next)),
+   );
   isGameStarted$: Observable<boolean> = this.localStoragePooling.pipe(
     map((store) => store.selectedSetIndex !== -1)
-  );  
+  );
+  lastSavedVersion = new BehaviorSubject(this.store);
   
   private audio = new Audio();
 
-
-  constructor() { }
+  constructor() { 
+  }
 
   get store(): GameStore {
     return JSON.parse(localStorage.getItem('store') as string) as GameStore;
   }
 
   set store(value) {
+    this.lastSavedVersion.next(this.store);
     localStorage.setItem('store', JSON.stringify(value));
   }
 
   resetGame() {
     localStorage.setItem('store', JSON.stringify(store));
   }
-
 
   hasNextQuestion() {
     if(this.store.currentQuestionIndex !== -1) {
@@ -64,15 +66,13 @@ export class PanelComponent {
     }));
 
   uncoverAnswer(index: number, noPoints = false) {
-    setTimeout(() => {
-      this.store = produce(this.store, draft => {
-        const question = draft.questionsSets[draft.selectedSetIndex]
-             .questions[draft.currentQuestionIndex]
-             .answers[index];
-        question.isAnswered = true;
-        draft.scores.roundScore += !noPoints ? question.value : 0;
-      })
-    }, 250)
+    this.store = produce(this.store, draft => {
+      const question = draft.questionsSets[draft.selectedSetIndex]
+            .questions[draft.currentQuestionIndex]
+            .answers[index];
+      question.isAnswered = true;
+      draft.scores.roundScore += !noPoints ? question.value : 0;
+    })
     this.play('good_answer.mp3');
   }
 
@@ -101,6 +101,10 @@ export class PanelComponent {
     this.store = produce(this.store, draft => {
       draft.errors = store.errors;
     });
+  }
+
+  undoGame() {
+    this.store = this.lastSavedVersion.value;
   }
 
   nextQuestion() {

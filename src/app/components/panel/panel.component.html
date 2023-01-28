@@ -6,6 +6,9 @@
   <button (click)="resetGame()" mat-raised-button color="primary">
     Zresetuj grę
   </button>
+  <button (click)="undoGame()" mat-raised-button color="secondary">
+    Cofnij
+  </button>
   <ng-container  *ngIf="localStoragePooling | async as store$">
       <button
       *ngFor="let set of store$.questionsSets; let i = index"
